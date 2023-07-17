@@ -6,19 +6,18 @@ import Splash from './screens/Splash';
 import Introduce from './screens/Introduce';
 import Register from './screens/Register';
 import Login from './screens/Login';
+import CreateNote from './screens/CreateNote';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
     <NavigationContainer >
       <Stack.Navigator screenOptions={{ headerShown: false, animation: 'none' }}>
         <Stack.Screen name="Splash" component={Splash}></Stack.Screen>
-        <Stack.Screen name="Login" component={Login}></Stack.Screen>
-
-
-
-        <Stack.Screen name="Introduce" component={Introduce}></Stack.Screen>
-
         <Stack.Screen name="Navigation" component={Navigation}></Stack.Screen>
+        <Stack.Screen name="CreateNote" component={CreateNote}></Stack.Screen>
+
+        <Stack.Screen name="Login" component={Login}></Stack.Screen>
+        <Stack.Screen name="Introduce" component={Introduce}></Stack.Screen>
         <Stack.Screen name="Register" component={Register}></Stack.Screen>
 
       </Stack.Navigator>

@@ -6,11 +6,7 @@ const Splash = ({ navigation }) => {
     useEffect(() => {
         const fethData = async () => {
             const account = await AsyncStorage.getItem('account');
-            const accountParse = JSON.parse(account);
-            console.log(account);
-            const email = accountParse.email;
-            const password = accountParse.password;
-            if (email.length > 0 && password.length > 0) {
+            if (account) {
                 setTimeout(() => {
                     navigation.navigate('Navigation')
                 }, 3000)

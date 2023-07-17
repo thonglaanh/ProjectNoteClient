@@ -6,7 +6,7 @@ import Information from './Information';
 import Notification from './Notification';
 import BookMark from './BookMark';
 import CreateNote from '../screens/CreateNote';
-const Navigation = () => {
+const Navigation = ({ navigation }) => {
     const Tab = createBottomTabNavigator();
     const CustomTabBarButton = ({ children, onPress }) => (
         <TouchableOpacity
@@ -21,7 +21,7 @@ const Navigation = () => {
             <View style={{
                 width: 70, height: 70,
                 borderRadius: 35,
-                backgroundColor: '#e32f45',
+                backgroundColor: '#333333',
                 ...styles.shadow
             }}>
                 {children}
@@ -34,7 +34,7 @@ const Navigation = () => {
                 position: 'absolute',
                 bottom: 25,
                 left: 20, right: 20, elevation: 0,
-                backgroundColor: '#ffff',
+                backgroundColor: '#333333',
                 borderRadius: 15,
                 height: 90,
                 ...styles.shadow
@@ -51,7 +51,7 @@ const Navigation = () => {
                             resizeMode='contain'
                             style={{
                                 width: 30, height: 30,
-                                tintColor: focused ? '#e32f45' : '#748c94'
+                                tintColor: focused ? '#fff' : 'gray'
                             }}></Image>
                     </View>
                 )
@@ -64,7 +64,7 @@ const Navigation = () => {
                                 resizeMode='contain'
                                 style={{
                                     width: 30, height: 30,
-                                    tintColor: focused ? '#e32f45' : '#748c94'
+                                    tintColor: focused ? '#fff' : 'gray'
                                 }}></Image>
                         </View>
                     )
@@ -76,7 +76,7 @@ const Navigation = () => {
                             resizeMode='contain'
                             style={{ width: 30, height: 30, tintColor: '#fff' }} />),
                     tabBarButton: (props) => (
-                        <CustomTabBarButton{...props} />
+                        <CustomTabBarButton{...props} onPress={() => navigation.navigate(CreateNote)} />
                     )
 
                 }}></Tab.Screen>
@@ -88,7 +88,7 @@ const Navigation = () => {
                                 resizeMode='contain'
                                 style={{
                                     width: 25, height: 25,
-                                    tintColor: focused ? '#e32f45' : '#748c94'
+                                    tintColor: focused ? '#fff' : 'gray'
                                 }}></Image>
                         </View>
                     )
@@ -101,7 +101,7 @@ const Navigation = () => {
                                 resizeMode='contain'
                                 style={{
                                     width: 30, height: 30,
-                                    tintColor: focused ? '#e32f45' : '#748c94'
+                                    tintColor: focused ? '#fff' : 'gray'
                                 }}></Image>
                         </View>
                     )
@@ -114,7 +114,7 @@ export default Navigation
 
 const styles = StyleSheet.create({
     shadow: {
-        shadowColor: '#7F5DF0',
+        shadowColor: '#fff',
         shadowOffset: {
             width: 0,
             height: 10

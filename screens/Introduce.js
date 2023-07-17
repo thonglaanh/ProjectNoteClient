@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native'
-import React from 'react'
+import React, { Component } from 'react';
+import { View, Text, ScrollView, TouchableOpacity, FlatList, StyleSheet, Image } from 'react-native';
 
 const Introduce = ({ navigation }) => {
     return (
@@ -8,8 +8,8 @@ const Introduce = ({ navigation }) => {
             <Text style={styles.title}>Stay Organized, Get Things Done</Text>
             <Text style={styles.subtitle}>
                 Effortlessly manage tasks, stay organized, and accomplish more with our app!</Text>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText} onPress={() => navigation.navigate('Login')}>Get started</Text>
+            <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.buttonText} >Get started</Text>
             </TouchableOpacity>
         </View>
     )
