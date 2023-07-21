@@ -32,18 +32,18 @@ const Navigation = ({ navigation }) => {
         <Tab.Navigator screenOptions={{
             tabBarStyle: {
                 position: 'absolute',
-                bottom: 25,
+                bottom: 10,
                 left: 20, right: 20, elevation: 0,
                 backgroundColor: '#333333',
                 borderRadius: 15,
                 height: 90,
                 ...styles.shadow
-
-
             },
             tabBarShowLabel: false,
-            headerShown: false
-        }}>
+            headerShown: false,
+            tabBarHideOnKeyboard: true
+        }}
+        >
             <Tab.Screen name="Home" component={Home} options={{
                 tabBarIcon: ({ focused }) => (
                     <View style={{ alignItems: 'center', justifyContent: 'center', top: 5 }}>

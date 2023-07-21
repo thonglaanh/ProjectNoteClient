@@ -1,15 +1,29 @@
-import { StyleSheet, Text, View, Image } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import React, { useEffect, useState } from 'react';
 
 const Item = (props) => {
-    return (
-        <View style={[styles.noteItem, { backgroundColor: props.item.color }, props.item.img ? styles.itemWithImage : styles.itemWithoutImage]}>
+    const endDate = new Date(props.item.endDate);
+    const hours = endDate.getHours();
+    const minutes = endDate.getMinutes();
+    const day = endDate.getDate();
+    const month = endDate.getMonth();
+    const year = endDate.getFullYear();
 
-            {props.item.img && <Image source={{ uri: props.item.img }} style={styles.noteImage} />}
-            <Text style={styles.noteTitle}>{props.item.title}</Text>
-            <Text style={styles.noteContent}>{props.item.content}</Text>
-            <Text style={styles.noteContent}>{props.item.startDate}</Text>
-        </View>
+    // Mảng ánh xạ các giá trị thứ trong tuần thành các tên thứ
+    const monthsNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const monthName = monthsNames[month];
+    return (
+        <TouchableOpacity>
+            <View style={[styles.noteItem, { backgroundColor: props.item.color }, props.item.img ? styles.itemWithImage : styles.itemWithoutImage]}>
+
+                {props.item.img && <Image source={{ uri: props.item.img }} style={styles.noteImage} />}
+                <View style={{ marginHorizontal: 5 }}>
+                    <Text style={styles.noteTitle}>{props.item.title}</Text>
+                    <Text style={styles.noteContent}>{props.item.content}</Text>
+                    <Text style={[styles.noteContent, { color: 'gray', fontSize: 10 }]}>{monthName}, {day} {year} at {hours}:{minutes}m</Text>
+                </View>
+            </View>
+        </TouchableOpacity>
     );
 };
 
@@ -17,11 +31,12 @@ export default Item;
 
 const styles = StyleSheet.create({
     noteItem: {
-        width: 172,
+        width: 170,
         margin: 3,
-        padding: 6,
-        borderRadius: 25,
+        padding: 5,
+        borderRadius: 15,
         overflow: 'hidden', // Cắt bỏ nội dung vượt quá kích thước item
+
     },
     itemWithImage: {
         maxHeight: 400, // Điều chỉnh chiều cao cho item có ảnh
@@ -31,18 +46,18 @@ const styles = StyleSheet.create({
         maxHeight: 190, // Điều chỉnh chiều cao cho item không có ảnh
     },
     noteImage: {
-        width: 154,
+        width: 160,
         height: 140,
-        marginHorizontal: 3,
-        borderRadius: 25,
+        borderRadius: 10,
     },
     noteTitle: {
         fontWeight: 'bold',
-        fontSize: 14,
-        marginHorizontal: 7,
+        fontSize: 15,
+        marginTop: 10,
+
     },
     noteContent: {
-        marginHorizontal: 7,
-        fontSize: 12
+        fontSize: 12,
+        marginBottom: 8
     },
 });

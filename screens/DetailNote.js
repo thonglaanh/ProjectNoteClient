@@ -7,16 +7,24 @@ import axios from 'axios';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import ColorPickerModal from '../components/ColorPickerModal';
 
-const CreateNote = ({ navigation }) => {
-    const [title, settitle] = useState()
-    const [content, setcontent] = useState()
+const DetailNote = ({ route, navigation }) => {
+    const { item } = route.params;
+
+    const [title, settitle] = useState(item.title)
+    const [content, setcontent] = useState(item.content)
     const [img, setimg] = useState()
-    const [endDate, setendDate] = useState(new Date());
-    const [color, setcolor] = useState('#F4DFCD')
+    const [imgItem, setimgItem] = useState(item.img)
+    const [endDate, setendDate] = useState(new Date(item.endDate));
+    const [color, setcolor] = useState(item.color)
     const [category, setcategory] = useState('64abad56b4e06ffbdff84489')
+
     //
     const [show, setShow] = useState(false)
     const [showColor, setShowColor] = useState(false);
+    useEffect(() => {
+        setimg(item.img);
+        setcolor(item.color);
+    }, [item.img, item.color]);
 
     const handleSelectColor = (selectedColor) => {
         setcolor(selectedColor);
@@ -45,6 +53,7 @@ const CreateNote = ({ navigation }) => {
                     type: "application/" + fileType
                 };
                 console.log(fileToUpload, '...............file')
+                setimgItem(null)
                 setimg(fileToUpload);
 
             }
@@ -59,10 +68,11 @@ const CreateNote = ({ navigation }) => {
         }
         formData.append('color', color)
         formData.append('category', category)
-        formData.append('endDate', endDate)
+        formData.append('endDate', '2023-07-18T00:00:00.000Z')
+        console.log(formData);
         try {
             console.log(formData);
-            await axios.post(config.API_URL + '/note/createNote', formData, {
+            await axios.post(config.API_URL + '/note/updateNote/' + item._id, formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -99,16 +109,25 @@ const CreateNote = ({ navigation }) => {
                 placeholder="Nhập tiêu đề của bạn"
                 placeholderTextColor="gray"
                 multiline={true} //
-                onChangeText={(txt) => settitle(txt)} />
+                value={title}
+                onChangeText={(txt) => settitle(txt)}
+            />
             <TextInput
                 style={{ fontSize: 18, color: '#fff', marginTop: 30 }}
                 placeholder="Nhập nội dung của bạn"
                 placeholderTextColor="gray"
                 multiline={true}
+                value={content}
                 onChangeText={(txt) => setcontent(txt)}
+
             />
             <View style={{ width: '100%', height: '40%', marginTop: 30 }}>
-                {img && <Image source={{ uri: img.uri }} style={{ resizeMode: 'cover', borderRadius: 10, width: '100%', height: '100%' }} />}
+                {imgItem ? (
+                    <Image source={{ uri: imgItem }} style={{ resizeMode: 'cover', borderRadius: 10, width: '100%', height: '100%' }} />
+                ) : img ? (
+                    <Image source={{ uri: img.uri }} style={{ resizeMode: 'cover', borderRadius: 10, width: '100%', height: '100%' }} />
+                ) : null}
+
             </View>
             <View style={{
                 backgroundColor: '#C7EBB3',
@@ -169,7 +188,7 @@ const CreateNote = ({ navigation }) => {
     );
 };
 
-export default CreateNote;
+export default DetailNote;
 
 const styles = StyleSheet.create({
     backgroundIcon: {

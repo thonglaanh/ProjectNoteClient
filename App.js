@@ -7,6 +7,7 @@ import Introduce from './screens/Introduce';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import CreateNote from './screens/CreateNote';
+import DetailNote from './screens/DetailNote';
 export default function App() {
   const Stack = createNativeStackNavigator();
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Stack.Screen name="Splash" component={Splash}></Stack.Screen>
         <Stack.Screen name="Navigation" component={Navigation}></Stack.Screen>
         <Stack.Screen name="CreateNote" component={CreateNote}></Stack.Screen>
+        <Stack.Screen name="DetailNote" component={DetailNote}></Stack.Screen>
 
         <Stack.Screen name="Login" component={Login}></Stack.Screen>
         <Stack.Screen name="Introduce" component={Introduce}></Stack.Screen>
